@@ -25,6 +25,16 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST /api/students
+router.post('/', async (req, res, next) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+    const newStudent = await Student.create(
+      { firstName, lastName, email },{include: Test})
+    res.json(newStudent);
+  } catch (error) {
+    next (error)
+  }
+})
 
 
 // PUT /api/students/:id
